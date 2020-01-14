@@ -2,6 +2,7 @@ from tkinter import Tk
 from tkinter.filedialog import askopenfilename
 import pdftotext
 from gtts import gTTS
+from os.path import splitext
 
 Tk().withdraw()
 fileLocation = askopenfilename()
@@ -13,5 +14,7 @@ stringOfText = ''
 for text in pdf:
     stringOfText += text
 
+outname = splitext(fileLocation)[0]+".mp3"
+
 finalFile = gTTS(text=stringOfText, lang='en')
-finalFile.save("GeneratedSpeech.mp3")
+finalFile.save(outname)
